@@ -1,13 +1,48 @@
-package tictactoe;
-
 import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
 
+        while (true) {
+            System.out.print("Input command: > ");
+            String input = scanner.nextLine();
+            String[] parts = input.trim().split("\\s+");
+
+            if (parts.length == 0 || parts[0].isEmpty()) {
+                continue;
+            }
+
+            if (parts[0].equals("exit")) {
+                break;
+            }
+
+            if (parts[0].equals("start")) {
+                if (parts.length != 3) {
+                    System.out.println("Bad parameters!");
+                    continue;
+                }
+
+                String playerX = parts[1];
+                String playerO = parts[2];
+
+                if (isValidType(playerX) && isValidType(playerO)) {
+                    playGame(playerX, playerO, scanner);
+                } else {
+                    System.out.println("Bad parameters!");
+                }
+            } else {
+                System.out.println("Bad parameters!");
+            }
+        }
+    }
+
+    public static boolean isValidType(String type) {
+        return type.equals("user") || type.equals("easy");
+    }
+
+    public static void playGame(String p1Type, String p2Type, Scanner scanner) {
         char[][] board = new char[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -16,26 +51,35 @@ public class Main {
         }
 
         printBoard(board);
+        Random random = new Random();
 
         while (true) {
-            userMove(board, scanner);
+            executeMove(p1Type, 'X', board, scanner, random); //Player X's turn
             printBoard(board);
             if (isGameOver(board)) break;
 
-            System.out.println("Making move level \"easy\"");
-            aiMove(board, random);
+            executeMove(p2Type, 'O', board, scanner, random); //Player O's turn
             printBoard(board);
             if (isGameOver(board)) break;
         }
     }
 
-    public static void userMove(char[][] board, Scanner scanner) {
+    public static void executeMove(String type, char symbol, char[][] board, Scanner scanner, Random random) {
+        if (type.equals("user")) {
+            userMove(board, scanner, symbol);
+        } else {
+            System.out.println("Making move level \"easy\"");
+            aiMove(board, random, symbol);
+        }
+    }
+
+    public static void userMove(char[][] board, Scanner scanner, char symbol) {
         while (true) {
             System.out.print("Enter the coordinates: > ");
             String input = scanner.nextLine();
             String[] parts = input.trim().split("\\s+");
 
-            if(parts.length < 2) {
+            if (parts.length < 2) {
                 System.out.println("You should enter numbers!");
                 continue;
             }
@@ -58,20 +102,20 @@ public class Main {
             if (row < 1 || row > 3 || col < 1 || col > 3) {
                 System.out.println("Coordinates should be from 1 to 3!");
             } else if (board[row - 1][col - 1] != ' ') {
-                System.out.println("The cell is occupied! Choose another one!");
+                System.out.println("This cell is occupied! Choose another one!");
             } else {
-                board[row - 1][col - 1] = 'X';
+                board[row - 1][col - 1] = symbol;
                 break;
             }
         }
     }
 
-    public static void aiMove(char[][] board, Random random) {
+    public static void aiMove(char[][] board, Random random, char symbol) {
         while (true) {
             int r = random.nextInt(3);
             int c = random.nextInt(3);
             if (board[r][c] == ' ') {
-                board[r][c] = 'O';
+                board[r][c] = symbol;
                 break;
             }
         }
@@ -100,28 +144,23 @@ public class Main {
     }
 
     public static String getGameState(char[][] b) {
-        boolean xWins = checkWin(b, 'X');
-        boolean oWins = checkWin(b, 'O');
-        boolean hasEmpty = false;
+        if (checkWin(b, 'X')) return "X wins";
+        if (checkWin(b, 'O')) return "O wins";
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (b[i][j] == ' ') hasEmpty = true;
+                if (b[i][j] == ' ') return "Game not finished";
             }
         }
-
-        if (xWins) return "X wins";
-        if (oWins) return "O wins";
-        if (!hasEmpty) return "Draw";
-        return "Game not finished";
+        return "Draw";
     }
 
-    public static boolean checkWin(char[][] b, char symbol) {
+    public static boolean checkWin(char[][] b, char s) {
         for (int i = 0; i < 3; i++) {
-            if (b[i][0] == symbol && b[i][1] == symbol && b[i][2] == symbol) return true;
-            if (b[0][i] == symbol && b[1][i] == symbol && b[2][i] == symbol) return true;
+            if (b[i][0] == s && b[i][1] == s && b[i][2] == s) return true;
+            if (b[0][i] == s && b[1][i] == s && b[2][i] == s) return true;
         }
-        return (b[0][0] == symbol && b[1][1] == symbol && b[2][2] == symbol) ||
-                (b[0][2] == symbol && b[1][1] == symbol && b[2][0] == symbol);
+        return (b[0][0] == s && b[1][1] == s && b[2][2] == s) ||
+                (b[0][2] == s && b[1][1] == s && b[2][0] == s);
     }
 }
