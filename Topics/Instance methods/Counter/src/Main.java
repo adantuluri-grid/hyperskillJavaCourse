@@ -1,14 +1,6 @@
 class Counter {
 
-    int current = 0;
+    int current;
 
     // write your methods here
-
-    public void inc() {
-        current++;
-    }
-
-    public int getCurrent() {
-        return current;
-    }
 }

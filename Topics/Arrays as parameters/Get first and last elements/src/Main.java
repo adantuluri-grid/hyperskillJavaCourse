@@ -3,9 +3,6 @@ import java.util.*;
 public class Main {
 
     // write a method here
-    public static  int[] getFirstAndLast(int[] nums) {
-        return new int[] {nums[0], nums[nums.length - 1]};
-    }
 
     /* Do not change code below */
     public static void main(String[] args) {

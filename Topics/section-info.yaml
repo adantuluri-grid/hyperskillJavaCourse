@@ -7,3 +7,7 @@ content:
   - Initializing new instances. Constructor
   - Getters and setters
   - Overloading
+  - Inheritance
+  - Keyword  super
+  - Adding annotations
+  - Static members

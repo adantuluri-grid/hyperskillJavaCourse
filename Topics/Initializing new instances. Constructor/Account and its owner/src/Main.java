@@ -7,12 +7,6 @@ public class Main {
 
         // create an instance of Account here
 
-        User owner = new User("demo-user", "Alexander", "Schmidt");
-
-        Account account = new Account("123456", 1000L, owner);
-
-        process(account);
-
         // pass it into process method
     }
 
