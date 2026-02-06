@@ -1,0 +1,9 @@
+type: unsupported
+custom_name: "Java: Getters, Setters & Access Control"
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/30981#comment
+status: Solved
+record: -1
