@@ -1,8 +1,8 @@
-package tictactoe;
+package org.example;
 
 import java.util.*;
 
-public class Main {
+public class App {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -21,7 +21,6 @@ public class Main {
         }
     }
 
-    // --- DIFFICULTY SELECTION ---
     public static boolean isValid(String s) {
         return s.equals("user") || s.equals("easy") || s.equals("medium") || s.equals("hard");
     }
@@ -58,7 +57,6 @@ public class Main {
         }
     }
 
-    // --- COMPUTER STRATEGIES (BASED ON LEVELS) ---
 
     public static void easyMove(char[][] board, char symbol) {
         Random random = new Random();

@@ -8,15 +8,6 @@ class Publication {
 
     public final String getInfo() {
         // write your code here
-        String type = getType();
-        String details = getDetails();
-
-        if (details.isEmpty()) {
-            return type + ": " + title;
-        } else {
-            return type + " (" + details + "): " + title;
-        }
-
     }
 
     public String getType() {
@@ -39,15 +30,6 @@ class Newspaper extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getType() {
-        return "Newspaper";
-    }
-
-    @Override
-    public String getDetails() {
-        return "source - " + source;
-    }
 
 }
 
@@ -61,14 +43,6 @@ class Article extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getType() {
-        return "Article";
-    }
-    @Override
-    public String getDetails() {
-        return "author - " + author;
-    }
 
 }
 
@@ -82,13 +56,5 @@ class Announcement extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getType() {
-        return "Announcement";
-    }
-    @Override
-    public String getDetails() {
-        return "days to expire - " + daysToExpire;
-    }
 
 }

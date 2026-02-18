@@ -10,11 +10,7 @@ class Animal {
 
 // Dog class
 class Dog extends Animal {
-    // Write override annotation and the makeSound method here'
-
-    public String makeSound() {
-        return "bark";
-    }
+    // Write override annotation and the makeSound method here
 
 }
 

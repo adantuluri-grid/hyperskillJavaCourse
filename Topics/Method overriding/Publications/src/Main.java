@@ -6,8 +6,6 @@ class Publication {
         this.title = title;
     }
 
-    public String getTitle() { return title; }
-
     public String getDetails() {
         return "title=\"" + title + "\"";
     }
@@ -24,10 +22,6 @@ class Newspaper extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getDetails() {
-        return "title=\"" + getTitle() + "\", source=\"" + source + "\"";
-    }
 
 }
 
@@ -41,10 +35,6 @@ class Article extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getDetails() {
-        return "title=\"" + getTitle() + "\", author=\"" + author + "\"";
-    }
 
 }
 
@@ -58,9 +48,5 @@ class Announcement extends Publication {
     }
 
     // write your code here
-    @Override
-    public String getDetails() {
-        return "title=\"" + getTitle() + "\", daysToExpire=" + daysToExpire;
-    }
 
 }
